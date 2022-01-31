@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book-Library</title>
-</head>
-<body>
-    <form >
-        <input type="text" placeholder="BOOK NAME" id="book-name">
-        <input type="text" placeholder="AUTHOR" id="author-name">
-        <input type="text" placeholder="Review" id="review">
-        <input type="submit" value="ADD" >
+    <style>
+        #main{
+
+        }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="text" placeholder="BOOK NAME" id="book-name" />
+      <input type="text" placeholder="AUTHOR" id="author-name" />
+      <input type="text" placeholder="Review" id="review" />
+      <input type="submit" value="ADD" />
     </form>
     <div id="main"></div>
-    
-</body>
+  </body>
 </html>
 
 <script>
-    let form=document.querySelector("form")
-    form.addEventListener("submit", addBookCard)
+  let form = document.querySelector("form");
+  form.addEventListener("submit", addBookCard);
 
-    function addBookCard(event){
-        event.preventDefault()
-        let bookName=document.querySelector("#book-name").value
-        let authorName=document.querySelector("#author-name").value
-        let review=document.querySelector("#review").value
+  function addBookCard(event) {
+    event.preventDefault();
+    let bookName = document.querySelector("#book-name").value;
+    let authorName = document.querySelector("#author-name").value;
+    let review = document.querySelector("#review").value;
 
+    let data = {
+      Book: bookName,
+      Author: authorName,
+      Review: review,
+    };
+
+    fetch("http://localhost:3000/book", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "content-type": "application/json; charset=UTF-8" },
+    })
+      .then((res) => res.json())
+      .then((resjson) => console.log(resjson))
+      .catch((err) => console.log(err));
+
+  }
+
+  fetch("http://localhost:3000/book")
+    .then((res) => res.json())
+    .then((res) => append(res))
+    .catch((err) => console.log(err));
+
+    let container =document.querySelector("#main")
+
+    function append(data){
+        data.forEach(element => {
+            let bookDiv=document.createElement("div")
+            bookDiv.setAttribute("id","bookdiv")
+            let bookN=document.createElement("h2")
+            bookN.textContent=`BOOK : ${element.Book}`
+            let authorN=document.createElement("h4")
+            authorN.textContent=`AUTHOR : ${element.Author}`
+            let reviewbox=document.createElement("h4")
+            authorN.textContent=`REVIEW : ${element.Review}`
+            let button =document.createElement("button")
+            button.setAttribute("id","button")
+            button.textContent="Edit"
+            bookDiv.append(bookN,authorN,reviewbox,button)
+            container.append(bookDiv)
+
+            
+        });
     }
 </script>
