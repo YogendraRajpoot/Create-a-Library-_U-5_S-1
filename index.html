@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-Library</title>
+</head>
+<body>
+    <form >
+        <input type="text" placeholder="BOOK NAME" id="book-name">
+        <input type="text" placeholder="AUTHOR" id="author-name">
+        <input type="text" placeholder="Review" id="review">
+        <input type="submit" value="ADD" >
+    </form>
+    <div id="main"></div>
+    
+</body>
+</html>
+
+<script>
+    let form=document.querySelector("form")
+    form.addEventListener("submit", addBookCard)
+
+    function addBookCard(event){
+        event.preventDefault()
+        let bookName=document.querySelector("#book-name").value
+        let authorName=document.querySelector("#author-name").value
+        let review=document.querySelector("#review").value
+
+    }
+</script>
