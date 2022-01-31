@@ -65,14 +65,12 @@
             let authorN=document.createElement("h4")
             authorN.textContent=`AUTHOR : ${element.Author}`
             let reviewbox=document.createElement("h4")
-            authorN.textContent=`REVIEW : ${element.Review}`
+            reviewbox.textContent=`REVIEW : ${element.Review}`
             let button =document.createElement("button")
-            button.setAttribute("id","button")
-            button.textContent="Edit"
-            bookDiv.append(bookN,authorN,reviewbox,button)
-            container.append(bookDiv)
-
-            
+            // button.setAttribute("id","button")
+            // button.textContent="Edit"
+            bookDiv.append(bookN,authorN,reviewbox)
+            container.append(bookDiv)            
         });
     }
 </script>
